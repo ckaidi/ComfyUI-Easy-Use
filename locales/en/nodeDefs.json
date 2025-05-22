@@ -5403,6 +5403,15 @@
     },
     "outputs": {}
   },
+  "easy imagesToBase64": {
+    "display_name": "Images To Base64",
+    "inputs": {
+      "images": {
+        "name": "images"
+      }
+    },
+    "outputs": {}
+  },
   "easy joinImageBatch": {
     "display_name": "JoinImageBatch",
     "inputs": {

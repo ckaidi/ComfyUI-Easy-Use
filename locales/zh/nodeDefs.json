@@ -5705,6 +5705,19 @@
       }
     }
   },
+  "easy imagesToBase64": {
+    "display_name": "多张图像到Base64",
+    "inputs": {
+      "images": {
+        "name": "图像"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "字符串"
+      }
+    }
+  },
   "easy joinImageBatch": {
     "display_name": "合并图像批次",
     "inputs": {

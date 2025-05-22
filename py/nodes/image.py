@@ -1764,6 +1764,37 @@ class imageToBase64:
       base64_str = base64.b64encode(image_bytes).decode("utf-8")
       return {"result": (base64_str,)}
 
+class imagesToBase64:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+        "required": {
+            "images": ("IMAGE",),
+        },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "to_base64"
+    CATEGORY = "EasyUse/Image"
+    OUTPUT_NODE = True
+
+    def to_base64(self, images, ):
+      import base64
+      from io import BytesIO
+
+      # 将张量图像转换为PIL图像
+      base64_strs=[]
+      for image in images:
+        pil_image = tensor2pil(image)
+
+        buffered = BytesIO()
+        pil_image.save(buffered, format="PNG")
+        image_bytes = buffered.getvalue()
+
+        base64_str = base64.b64encode(image_bytes).decode("utf-8")
+        base64_strs.append(base64_str)
+      return {"result": (base64_strs,)}
+
 class removeLocalImage:
 
   def __init__(self):
@@ -2086,6 +2117,7 @@ NODE_CLASS_MAPPINGS = {
   "easy loadImagesForLoop": loadImagesForLoop,
   "easy loadImageBase64": loadImageBase64,
   "easy imageToBase64": imageToBase64,
+  "easy imagesToBase64": imagesToBase64,
   "easy joinImageBatch": JoinImageBatch,
   "easy humanSegmentation": humanSegmentation,
   "easy removeLocalImage": removeLocalImage,
@@ -2126,6 +2158,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
   "easy loadImageBase64": "Load Image (Base64)",
   "easy loadImagesForLoop": "Load Images For Loop",
   "easy imageToBase64": "Image To Base64",
+  "easy imagesToBase64": "Images To Base64",
   "easy humanSegmentation": "Human Segmentation",
   "easy removeLocalImage": "Remove Local Image",
   "easy makeImageForICLora": "Make Image For ICLora"
